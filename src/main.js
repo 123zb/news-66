@@ -9,6 +9,12 @@ import './styles/iconfont.css'
 import router from './router'
 import HmHeader from './components/HmHeader.vue'
 import HmLogo from './components/HmLogo.vue'
+import axios from 'axios'
+
+// 把axios挂载到原型上
+Vue.prototype.$axios = axios
+// 配置axios的默认基准地址
+axios.defaults.baseURL = 'http://localhost:3000'
 
 // 全局注册组件
 Vue.component('hm-header', HmHeader)
