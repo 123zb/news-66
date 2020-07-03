@@ -9,22 +9,55 @@ import './styles/iconfont.css'
 import router from './router'
 import HmHeader from './components/HmHeader.vue'
 import HmLogo from './components/HmLogo.vue'
+import HmNavBar from './components/HmNavBar.vue'
+
 import axios from 'axios'
+import moment from 'moment'
 
 // 把axios挂载到原型上
 Vue.prototype.$axios = axios
 // 配置axios的默认基准地址
 axios.defaults.baseURL = 'http://localhost:3000'
+// 给axios配置请求拦截器
+axios.interceptors.request.use(function(config) {
+  // 浏览器发送的ajax请求的所有的配置信息
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = token
+  }
+  return config
+})
+
+// 响应拦截器
+axios.interceptors.response.use(function(res) {
+  const { statusCode, message } = res.data
+  if (statusCode === 401 && message === '用户信息验证失败') {
+    // token失效导致
+    Toast.fail(message)
+    // 跳转到登录页面
+    router.push('/login')
+    // 删除过期的token
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+  }
+  return res
+})
 
 // 全局注册组件
 Vue.component('hm-header', HmHeader)
 Vue.component('hm-logo', HmLogo)
+Vue.component('hm-navbar', HmNavBar)
 
 Vue.use(Button)
 Vue.use(Field)
 Vue.use(Form)
 Vue.use(Toast)
 Vue.config.productionTip = false
+
+// 定义全局过滤器
+Vue.filter('time', function(input) {
+  return moment(input).format('YYYY-MM-DD')
+})
 
 new Vue({
   router,
