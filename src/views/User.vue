@@ -35,6 +35,7 @@
       <hm-navbar @click="$router.push('/user-edit')">
         <template>设置</template>
       </hm-navbar>
+      <hm-navbar @click="logout">退出</hm-navbar>
     </div>
   </div>
 </template>
@@ -76,6 +77,31 @@ export default {
       this.$router.push('/login')
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
+    }
+  },
+  methods: {
+    async logout() {
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '亲，你确定要退出这个地址吗'
+        })
+        // 能到着说明点了确定
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
+        this.$router.push('/login')
+        this.$toast.success('退出成功')
+      } catch (e) {
+        this.$toast('取消退出')
+      }
+
+      // .then(() => {
+      //   // 退出成功
+      // })
+      // .catch(() => {
+      //   // on cancel
+      //   this.$toast('取消退出')
+      // })
     }
   }
 }

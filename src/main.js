@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { Button, Field, Form, Toast } from 'vant'
 import 'amfe-flexible'
 
 // 引入通用样式
@@ -13,7 +12,8 @@ import HmNavBar from './components/HmNavBar.vue'
 
 import axios from 'axios'
 import moment from 'moment'
-
+import './vant'
+import { Toast } from 'vant'
 // 把axios挂载到原型上
 Vue.prototype.$axios = axios
 // 配置axios的默认基准地址
@@ -48,10 +48,6 @@ Vue.component('hm-header', HmHeader)
 Vue.component('hm-logo', HmLogo)
 Vue.component('hm-navbar', HmNavBar)
 
-Vue.use(Button)
-Vue.use(Field)
-Vue.use(Form)
-Vue.use(Toast)
 Vue.config.productionTip = false
 
 // 定义全局过滤器

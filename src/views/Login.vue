@@ -20,7 +20,7 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">提交</van-button>
+        <van-button round block type="info" native-type="submit" @click="fn">登录</van-button>
       </div>
     </van-form>
     <p class="tips">
@@ -82,6 +82,9 @@ export default {
       } else {
         this.$toast.fail(message)
       }
+    },
+    fn() {
+      this.$router.push('/login')
     }
   }
 }
