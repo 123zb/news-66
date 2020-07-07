@@ -9,7 +9,8 @@ import {
   Radio,
   Cell,
   CellGroup,
-  Uploader
+  Uploader,
+  List
 } from 'vant'
 
 Vue.use(Button)
@@ -22,3 +23,4 @@ Vue.use(RadioGroup)
 Vue.use(Cell)
 Vue.use(CellGroup)
 Vue.use(Uploader)
+Vue.use(List)

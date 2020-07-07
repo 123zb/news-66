@@ -17,17 +17,17 @@
       </div>
     </div>
     <div class="nav">
-      <hm-navbar>
+      <hm-navbar @click="$router.push('/myfollow')">
         <template>我的关注</template>
         <!--  v-slot：content  # -->
         <template #content>关注的用户</template>
       </hm-navbar>
-      <hm-navbar>
+      <hm-navbar @click="$router.push('/mycomment')">
         <template>我的跟帖</template>
         <!--  v-slot：content  # -->
         <template #content>跟帖/回复</template>
       </hm-navbar>
-      <hm-navbar>
+      <hm-navbar @click="$router.push('/mystar')">
         <template>我的收藏</template>
         <!--  v-slot：content  # -->
         <template #content>文章/视频</template>

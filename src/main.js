@@ -51,9 +51,18 @@ Vue.component('hm-navbar', HmNavBar)
 Vue.config.productionTip = false
 
 // 定义全局过滤器
-Vue.filter('time', function(input) {
-  return moment(input).format('YYYY-MM-DD')
+Vue.filter('time', function(input, str = 'YYYY-MM-DD') {
+  return moment(input).format(str)
 })
+
+// 给vue的原型添加一个方法，这个方法用于处理图片的地址
+Vue.prototype.$url = function(url) {
+  if (url.startsWith('http')) {
+    return url
+  } else {
+    return axios.defaults.baseURL + url
+  }
+}
 
 new Vue({
   router,
